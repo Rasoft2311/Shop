@@ -1,13 +1,17 @@
+import { Provider } from 'react-redux';
+import { compose, createStore } from 'redux';
+import App from './components/App';
 import './main.scss';
-import ReactLogo from './assets/icons/react-icon.svg';
+import rootReducer from './store/rootReducer';
 
-const App = () => {
-  return (
-    <div style={{display: 'flex', justifyContent: 'center', paddingTop: '30vh', alignItems: 'center'}}>
-      <ReactLogo style={{width: '100px', height: '100px'}}/>
-      <p>React App Skeleton</p>
-    </div>
-  );
-}
+const store = createStore(
+  rootReducer, compose(
+    window.__REDUX_DEVTOOLS_EXTENSION__ && process.env.NODE_ENV === 'development' && window.__REDUX_DEVTOOLS_EXTENSION__()
+  ));
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+      <App />
+  </Provider>,
+  document.getElementById('root')
+)
