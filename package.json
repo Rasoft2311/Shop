@@ -6,7 +6,6 @@
   "scripts": {
     "start": "webpack serve --env mode=development",
     "build": "webpack --env mode=production",
-    "dev": "webpack --env mode=development",
     "analyze": "webpack --env mode=analyze"
   },
   "author": "Daniel Taran",

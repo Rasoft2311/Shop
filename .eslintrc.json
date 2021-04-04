@@ -5,6 +5,7 @@
   ],
   "rules": {
     "quotes": [1, "single", { "avoidEscape": true }],
+    "semi": [1, "always"],
     "react/display-name": 1,
     "react/jsx-key": 1,
     "react/jsx-uses-react": 1,
@@ -15,11 +16,14 @@
     "react/no-render-return-value": 1,
     "react/no-string-refs": 1,
     "react/no-unescaped-entities": 1,
-    "react/no-unknown-property": 1,
+    "react/no-unknown-property": 2,
     "react/no-unsafe": 0,
     "react/prop-types": 1,
     "react/react-in-jsx-scope": 2,
-    "react/require-render-return": 2
+    "react/require-render-return": 2,
+    "react/style-prop-object": 2,
+    "import/named": 2,
+    "import/default": 2
   },
   "globals": {
     "React": "readonly",

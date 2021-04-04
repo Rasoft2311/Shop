@@ -1,0 +1,272 @@
+@import "../../styles/resolution.scss";
+@import "../../styles/colors.scss";
+
+.header {
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  padding: 5px 0;
+  z-index: 10;
+  background-color: rgba(11, 11, 12, 1);
+  color: white;
+}
+
+.header__inner {
+  display: flex;
+
+  @include phone-only {
+    padding: 0 20px;
+  }
+
+  @include phone-lg-only {
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  @include phone {
+    justify-content: space-between;
+  }
+}
+
+.header__el {
+  @include tablet {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+
+.header__nav {
+  @include phone {
+    position: absolute;
+    top: 0;
+    right: -100%;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    color: black;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  @include phone-only {
+    padding: 5px 20px;
+  }
+
+  @include tablet {
+    display: none;
+  }
+}
+
+.header.js-nav-mobile-open .header__nav {
+  @include phone {
+    transform: translateX(-100%);
+  }
+}
+
+.header__nav-inner {
+  @include phone-lg-only {
+    max-width: 540px;
+    margin: 0 auto;
+  }
+}
+
+.header__nav-upper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__button {
+  background-color: transparent;
+
+  @include tablet {
+    display: none;
+  }
+}
+
+.header__basket {
+  justify-content: flex-end;
+}
+
+.header__telephone {
+  flex-direction: column;
+  align-items: flex-end !important;
+
+  @include phone {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  @include phone-lg-only {
+    margin-top: 40px;
+  }
+
+  span:first-child {
+    margin-bottom: 10px;
+
+    @include phone {
+      font-size: 20px;
+      display: block;
+    }
+
+    @include phone-lg-only {
+      font-size: 24px;
+    }
+
+    @include tablet {
+      font-size: 14px;
+    }
+
+    @include tablet-only {
+      padding-left: 77px;
+    }
+
+    @include desktop {
+      font-size: 16px;
+    }
+
+    @include widescreen {
+      font-size: 18px;
+    }
+  }
+
+  span:last-child {
+
+    @include phone {
+      font-size: 25px;
+      display: block;
+    }
+
+    @include phone-lg-only {
+      font-size: 30px;
+    }
+
+    @include tablet {
+      font-size: 20px;
+    }
+
+    @include desktop {
+      font-size: 24px;
+    }
+
+    @include widescreen {
+      font-size: 24px;
+    }
+  }
+}
+
+.header__telephone--no-phone {
+  @include phone{
+    display: none;
+  }
+}
+
+.header__socials {
+  justify-content: flex-start;
+
+  @include phone {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  svg {
+    @include phone-lg-only {
+      width: 40px;
+      height: 40px;
+    }
+
+    @include tablet-only {
+      width: 25px;
+    }
+  }
+}
+
+.header__socials--non-mobile {
+  @include phone {
+    display: none;
+  }
+}
+
+.header__logo {
+
+  @include phone {
+      display: flex;
+      align-items: center;
+  }
+
+  g {
+    @include desktop {
+      transition: fill 0.2s ease-in-out;
+    }
+  }
+
+  a:hover, a:active {
+    g {
+      @include desktop {
+        fill: $main-color;
+      }
+    }
+  }
+
+  svg {
+    width: 142px;
+    height: 122px;
+
+    @include phone-only {
+      width: 92px;
+      height: 82px;
+    }
+
+    @include phone-lg-only {
+      width: 112px;
+      height: 102px;
+    }
+  }
+}
+
+.header__logo--black {
+  g {
+    fill: black;
+  }
+}
+
+.header__basket-icon {
+  position: relative;
+
+  @include desktop {
+    cursor: pointer;
+  }
+}
+
+.header__amount {
+  position: absolute;
+  left: -6px;
+  bottom: 0;
+  font-size: 17px;
+  color: white;
+}
+
+.header__socials-link {
+  margin: 0 10px;
+
+  svg {
+    @include phone {
+      fill : black;
+    }
+
+    @include desktop {
+      transition: fill 0.2s ease-in-out;
+    }
+  }
+}
+
+.header__socials-link:hover, .header__socials-link:active {
+  svg {
+    @include desktop {
+      fill: $main-color;
+    }
+  }
+}
