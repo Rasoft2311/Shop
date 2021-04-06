@@ -1,0 +1,9 @@
+@import "../../styles/resolution.scss";
+@import "../../styles/colors.scss";
+
+.footer {
+  // margin-top: auto;
+  flex-shrink: 0;
+  background-color: red;
+  height: 300px;
+}

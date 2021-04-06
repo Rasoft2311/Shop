@@ -2,10 +2,9 @@
 @import "../../styles/colors.scss";
 
 .header {
-  position: fixed;
-  top:0;
-  left:0;
-  right:0;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
   padding: 5px 0;
   z-index: 10;
   background-color: rgba(11, 11, 12, 1);

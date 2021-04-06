@@ -4,6 +4,7 @@ import DrinksIcon from '@assets/icons/drinks-icon.svg';
 import SauceIcon from '@assets/icons/sauce-icon.svg';
 import BakeryIcon from '@assets/icons/bakery-icon.svg';
 import PropTypes from 'prop-types';
+import './Categories.scss';
 
 export const Categories = ({ extendedClass }) => ((
   <nav className={`categories container ${extendedClass}`}>

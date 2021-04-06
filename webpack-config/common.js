@@ -66,4 +66,4 @@ module.exports = {
       '@assets': `${path.src}/assets`
     }
   },
-}
+};
