@@ -1,5 +1,6 @@
-const rootReducer = (state, action) => {
-  return state;
-};
+import { combineReducers } from 'redux';
+import { themeReducer } from './Theme/reducer';
 
-export default rootReducer;
+export const rootReducer = combineReducers ({
+  theme: themeReducer
+});

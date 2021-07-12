@@ -2,7 +2,7 @@ import { Provider } from 'react-redux';
 import { compose, createStore } from 'redux';
 import { App } from './components/App';
 import './main.scss';
-import rootReducer from './store/rootReducer';
+import { rootReducer } from './store/rootReducer';
 
 const store = createStore(
   rootReducer, compose(

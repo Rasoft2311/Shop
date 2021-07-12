@@ -5,13 +5,7 @@ const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   mode: 'production',
-  entry: {
-    index: {
-      import: `${path.src}/index.js`,
-      dependOn: ['react']
-    },
-    react: ['react', 'react-dom', 'prop-types'],
-  },
+  entry: `${path.src}/index.js`,
   output: {
     path: path.build,
     filename: 'js/[name].[contenthash].bundle.js',
@@ -53,6 +47,9 @@ module.exports = {
     })
   ],
   optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
     minimize: true,
     minimizer: [
       `...`,

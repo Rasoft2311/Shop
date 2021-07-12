@@ -1,3 +1,3 @@
-import { Categories } from './Categories';
+import { CategoriesHeader } from './CategoriesHeader';
 
-export { Categories} ;
+export { CategoriesHeader} ;
