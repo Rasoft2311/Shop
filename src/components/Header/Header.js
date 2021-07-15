@@ -23,13 +23,13 @@ const useStyles = makeStyles((theme) => ({
   },
   inner: {
     height: theme.customVariables.headerHeightMobile,
-    padding: '0 15px',
+    padding: `0 ${theme.spacing(2)}px`,
     backgroundColor: theme.palette.background[theme.palette.type],
     [theme.breakpoints.up('md')]: {
       height: theme.customVariables.headerHeightDesktop,
     },
     [theme.breakpoints.up('sm')]: {
-      padding: '0 25px',
+      padding: `0 ${theme.spacing(3)}px`,
     },
   },
   logoWrap: {
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     fill: theme.palette.primary[theme.palette.type],
   },
   innerItem: {
-    marginRight: '15px'
+    marginRight: theme.spacing(2)
   },
   cartIcon: {
     fontSize: '2.1rem'
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export const Header = () => {
+export const Header = ({isNavMenuOpened, onNavMenuToggle}) => {
   const classes = useStyles();
   return (
     <header className={classes.root}>
@@ -87,7 +87,7 @@ export const Header = () => {
         <Grid item container xs={10} sm={5} justify="flex-end" alignItems="center">
           <div className={classes.innerItem}>
             <IconButton aria-label="open shopping cart">
-              <ShoppingCartIcon className={clsx(classes.icon, classes.cartIcon) }/>
+              <ShoppingCartIcon className={clsx(classes.icon, classes.cartIcon)}/>
               <span className={classes.cartAmount}>
                 0
               </span>
@@ -95,10 +95,10 @@ export const Header = () => {
             <ModalCartMenu/>
           </div>
           <div>
-            <IconButton aria-label="open menu">
+            <IconButton onClick={onNavMenuToggle} aria-label="open menu">
               <MenuIcon className={classes.icon}/>
             </IconButton>
-            <ModalNavigationMenu/>
+            <ModalNavigationMenu isNavMenuOpened={isNavMenuOpened} onNavMenuToggle={onNavMenuToggle}/>
           </div>
         </Grid>
       </Grid>

@@ -3,17 +3,19 @@ import { NavigationList } from '../List';
 import { ModalMenu } from './ModalMenu';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  scrollable: {
+    height: '100%',
+    overflow: 'auto'    
   }
 }));
-
-const ref = React.createRef();
 
 export const ModalNavigationMenu = (props) => {
   const classes = useStyles();
   return (
-    <ModalMenu scrollableElRef={ref} title="Меню">
-      <NavigationList ref={ref}/>
+    <ModalMenu {...props} title="Меню">
+      <div className={classes.scrollable}>
+        <NavigationList/>
+      </div>
     </ModalMenu>
   );
 };
