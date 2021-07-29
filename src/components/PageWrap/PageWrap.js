@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import BackgroundImage from '@assets/images/app-background.jpg';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  pageWrap: {
     color: theme.palette.primary[theme.palette.type],
     backgroundSize: '400px',
     backgroundRepeat: 'repeat',
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 export const PageWrap = (props) => {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
+    <div className={classes.pageWrap}>
       <div className={classes.darkener}>
         {props.children}
       </div>

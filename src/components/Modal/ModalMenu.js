@@ -3,7 +3,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
-  inner: {
+  modalMenuInner: {
     position: 'absolute',
     right: '0',
     top: 0,
@@ -12,16 +12,19 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.backgroundSecondary[theme.palette.type],
     color: theme.palette.secondary[theme.palette.type],
     [theme.breakpoints.up('sm')]: {
-      width: '300px'
+      width: props => `${props.menuWidth}px`
     },
   },
-  content: {
-    height: `calc(100% - ${theme.customVariables.headerHeightMobile}px)`
+  modalMenuContent: {
+    height: `calc(100% - ${theme.customVariables.headerHeightMobile}px)`,
+    [theme.breakpoints.up('md')]: {
+      height: `calc(100% - ${theme.customVariables.headerHeightDesktop}px)`,
+    },
   },
   head: {
     height: theme.customVariables.headerHeightMobile,
     padding: `0 ${theme.spacing(2)}px`,
-    borderBottom: '1px solid rgba(0,0,0,0.2)',
+    borderBottom: `1px solid ${theme.palette.borderLine[theme.palette.type]}`,
     [theme.breakpoints.up('md')]: {
       height: theme.customVariables.headerHeightDesktop,
     },
@@ -34,22 +37,22 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export const ModalMenu = ({onNavMenuToggle, isNavMenuOpened, children, title}) => {
-  const classes = useStyles();
+export const ModalMenu = ({onMenuToggle, isMenuOpened, children, title, menuWidth}) => {
+  const classes = useStyles({menuWidth});
   
   return (
-    <Modal open={isNavMenuOpened} onClose={onNavMenuToggle}>
-      <Slide direction="left" in={isNavMenuOpened}>
-        <div className={classes.inner}>
+    <Modal open={isMenuOpened} onClose={onMenuToggle}>
+      <Slide direction="left" in={isMenuOpened}>
+        <div className={classes.modalMenuInner}>
           <Grid className={classes.head} container alignItems="center">
-            <Grid container item xs={6}  justify='flex-start'><Typography variant="h2">{title}</Typography></Grid>
-            <Grid container item xs={6}  justify='flex-end'>
-              <IconButton aria-label="close menu" onClick={onNavMenuToggle}>
+            <Grid container item xs={6}  justifyContent='flex-start'><Typography variant="h2">{title}</Typography></Grid>
+            <Grid container item xs={6}  justifyContent='flex-end'>
+              <IconButton aria-label="close menu" onClick={onMenuToggle}>
                 <CloseIcon className={classes.closeIcon}/>
               </IconButton>
             </Grid>
           </Grid>
-          <div className={classes.content}>
+          <div className={classes.modalMenuContent}>
             {children}
           </div>
         </div>

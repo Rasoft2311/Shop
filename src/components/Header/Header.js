@@ -7,19 +7,19 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { CategoriesHeader } from '../Categories';
 import clsx from 'clsx';
-import { ModalCartMenu, ModalNavigationMenu } from '../Modal';
+import { ModalMenuContainer } from '../Modal';
+import { ModalMenu } from '../Modal/ModalMenu';
+import { NavigationList } from '../List';
+import { ShoppingCart } from '../ShoppingCart';
 
 
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  header: {
     position: 'fixed',
     top: '0',
     left: '0',
     right: '0',
-    [theme.breakpoints.up('md')]: {
-      paddingLeft: theme.customVariables.headerHeightDesktop,
-    },
   },
   inner: {
     height: theme.customVariables.headerHeightMobile,
@@ -61,10 +61,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export const Header = ({isNavMenuOpened, onNavMenuToggle}) => {
+export const Header = () => {
   const classes = useStyles();
   return (
-    <header className={classes.root}>
+    <header className={classes.header}>
       <Grid container className={classes.inner}>
         <Hidden xsDown>
           <Grid item container sm={5} alignItems="center" >
@@ -79,26 +79,42 @@ export const Header = ({isNavMenuOpened, onNavMenuToggle}) => {
             </Link>
           </Grid>
         </Hidden>
-        <Grid className={classes.logoWrap} item container xs={2} justify='center' alignItems="center">
+        <Grid className={classes.logoWrap} item container xs={2} justifyContent='center' alignItems="center">
           <Link href="#" className={classes.logo} aria-label="open our main page">
             <ShopLogo className={classes.icon}/>
           </Link>
         </Grid>
-        <Grid item container xs={10} sm={5} justify="flex-end" alignItems="center">
+        <Grid item container xs={10} sm={5} justifyContent="flex-end" alignItems="center">
           <div className={classes.innerItem}>
-            <IconButton aria-label="open shopping cart">
-              <ShoppingCartIcon className={clsx(classes.icon, classes.cartIcon)}/>
-              <span className={classes.cartAmount}>
-                0
-              </span>
-            </IconButton>
-            <ModalCartMenu/>
+            <ModalMenuContainer>
+                {({ isMenuOpened, onMenuToggle }) => (
+                  <>
+                    <IconButton onClick={onMenuToggle} aria-label="open shopping cart">
+                      <ShoppingCartIcon className={clsx(classes.icon, classes.cartIcon)}/>
+                      <span className={classes.cartAmount}>
+                        0
+                      </span>
+                    </IconButton>
+                    <ModalMenu menuWidth='400' isMenuOpened={isMenuOpened} onMenuToggle={onMenuToggle} title="Кошик">
+                      <ShoppingCart />
+                    </ModalMenu>
+                  </>
+              )}
+            </ModalMenuContainer>
           </div>
           <div>
-            <IconButton onClick={onNavMenuToggle} aria-label="open menu">
-              <MenuIcon className={classes.icon}/>
-            </IconButton>
-            <ModalNavigationMenu isNavMenuOpened={isNavMenuOpened} onNavMenuToggle={onNavMenuToggle}/>
+            <ModalMenuContainer>
+              {({ isMenuOpened, onMenuToggle }) => (
+                <>
+                  <IconButton onClick={onMenuToggle} aria-label="open menu">
+                    <MenuIcon className={classes.icon}/>
+                  </IconButton>
+                  <ModalMenu menuWidth='300' isMenuOpened={isMenuOpened} onMenuToggle={onMenuToggle} title="Меню">
+                    <NavigationList/>
+                  </ModalMenu>
+                </>
+              )}
+            </ModalMenuContainer>
           </div>
         </Grid>
       </Grid>

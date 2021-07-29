@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core';
 import { checkPropTypes } from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  container: {
     marginLeft: 'auto',
     marginRight: 'auto',
     [theme.breakpoints.only('xs')]: {
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 export const Container = (props) => {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
+    <div className={classes.container}>
       {props.children}
     </div>
   );

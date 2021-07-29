@@ -1,6 +1,10 @@
 import { Link, List, ListItem, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
+  navigationList: {
+    height: '100%',
+    overflow: 'auto'  
+  },
   link: {
     width: '100%',
     padding: theme.spacing(2),
@@ -12,10 +16,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export const NavigationList = (props) => {
+export const NavigationList = () => {
   const classes = useStyles();
   return (
-    <List disablePadding>
+    <List className={classes.navigationList} disablePadding>
       <ListItem disableGutters>
         <Link className={classes.link} href="https://www.google.com" variant="h3">
           Главная

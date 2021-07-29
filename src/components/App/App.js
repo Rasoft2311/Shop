@@ -4,9 +4,9 @@ import { useSelector } from 'react-redux';
 import { MainPage } from '../../pages/MainPage/MainPage';
 import { getThemeByName } from '../../themes';
 import { Footer } from '../Footer';
-import { HeaderContainer } from '../Header/HeaderContainer';
+import { Header } from '../Header/Header';
 import { Main } from '../Main';
-import { PageWrap } from '../PageContent';
+import { PageWrap } from '../PageWrap';
 
 
 export const App = () => {
@@ -15,7 +15,7 @@ export const App = () => {
     <MuiThemeProvider theme={getThemeByName(theme)}>
       <CssBaseline />
       <PageWrap>
-        <HeaderContainer />
+        <Header />
         <Main>
           <MainPage />
         </Main>

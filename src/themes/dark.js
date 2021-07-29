@@ -1,6 +1,6 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from '@material-ui/core/styles';
 
-export const darkTheme = createMuiTheme({
+export const darkTheme = createTheme({
   breakpoints: {
     values: {
       xs: 0,
@@ -39,6 +39,9 @@ export const darkTheme = createMuiTheme({
     },
     backgroundSecondary: {
       dark: '#fff'
+    },
+    borderLine: {
+      dark: 'rgba(0,0,0,0.2)'
     }
   },
   overrides: {
@@ -46,6 +49,9 @@ export const darkTheme = createMuiTheme({
       '@global': {
         html: {
           fontSize: '16px'
+        },
+        body: {
+          minWidth: '320px'
         },
         ul: {
           margin: 0,

@@ -1,4 +1,3 @@
 
-import { NavigationList } from './NavigationList';
-
-export { NavigationList };
+export { NavigationList } from './NavigationList';
+export { ShoppingCartList } from './ShoppingCartList';
