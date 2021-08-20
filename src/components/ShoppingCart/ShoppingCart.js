@@ -1,8 +1,8 @@
 import { makeStyles } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import PropTypes from 'prop-types';
-import { ShoppingCartListContainer } from '../List/ShoppingCartListContainer';
-import { OrderSummary } from '../OrderSummary';
+import { ShoppingCartListContainer } from './ShoppingCartListContainer';
+import { OrderSummaryContainer } from '../OrderSummary';
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
   orderSummary: {
     height: '150px',
-    borderTop: `1px solid ${theme.palette.borderLine[theme.palette.type]}`,
+    borderTop: `1px solid ${theme.palette.borderLine.main}`,
   }
 }));
 
@@ -24,7 +24,7 @@ export const ShoppingCart = () => {
         <ShoppingCartListContainer />
       </div>
       <div className={classes.orderSummary}>
-        <OrderSummary/>
+        <OrderSummaryContainer/>
       </div>
     </>
   );

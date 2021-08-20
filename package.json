@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack serve --env mode=development",
     "build": "webpack --env mode=production",
-    "analyze": "webpack --env mode=analyze"
+    "analyze": "webpack --env mode=analyze",
+    "server": "NODE_ENV=development nodemon server.js --watch app"
   },
   "author": "Daniel Taran",
   "license": "ISC",
@@ -53,14 +54,34 @@
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
+    "admin-bro": "^4.0.1",
+    "admin-bro-expressjs": "^2.1.1",
+    "admin-bro-mongoose": "^0.5.2",
     "axios": "^0.21.1",
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
     "clsx": "^1.1.1",
+    "connect-mongo": "^4.4.1",
     "core-js": "^3.9.0",
+    "csurf": "^1.11.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.3.0",
+    "express-session": "^1.17.2",
+    "formik": "^2.2.9",
+    "helmet": "^4.6.0",
+    "hpp": "^0.2.3",
+    "mongoose": "^5.13.5",
+    "morgan": "^1.10.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.3",
+    "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "yup": "^0.32.9"
   }
 }

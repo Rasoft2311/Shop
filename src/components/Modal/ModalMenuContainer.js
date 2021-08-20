@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useState } from "react";
 
 export const ModalMenuContainer = ({children}) => {
@@ -5,5 +6,9 @@ export const ModalMenuContainer = ({children}) => {
   const onMenuToggle = () => {
     setIsMenuOpened(isNavMenuOpened => !isNavMenuOpened);
   }
+  useEffect(() => {
+    if(isMenuOpened) document.querySelector("header").style.paddingRight = '15px';
+    else {document.querySelector("header").style.paddingRight = '0';}
+  }, [isMenuOpened])
   return children({ isMenuOpened, onMenuToggle });
 };

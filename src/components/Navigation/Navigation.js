@@ -1,25 +1,25 @@
 import { Link, List, ListItem, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-  navigationList: {
+  navigation: {
     height: '100%',
     overflow: 'auto'  
   },
   link: {
     width: '100%',
     padding: theme.spacing(2),
-    color: theme.palette.secondary[theme.palette.type],
+    color: theme.palette.primary.main,
     textAlign: 'center'
   },
   active: {
-    color: theme.palette.third[theme.palette.type],
+    color: theme.palette.third.main,
   }
 }));
 
-export const NavigationList = () => {
+export const Navigation = () => {
   const classes = useStyles();
   return (
-    <List className={classes.navigationList} disablePadding>
+    <List className={classes.navigation} disablePadding>
       <ListItem disableGutters>
         <Link className={classes.link} href="https://www.google.com" variant="h3">
           Главная

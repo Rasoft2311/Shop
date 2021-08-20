@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   item: {
     width: '100%',
     marginBottom: '10px',
-    color: theme.palette.secondary[theme.palette.type],
+    color: theme.palette.primary.main,
     textAlign: 'center',
     "&:last-child": {
       marginBottom: 0,

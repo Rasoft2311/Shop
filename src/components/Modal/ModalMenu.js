@@ -9,8 +9,8 @@ const useStyles = makeStyles((theme) => ({
     top: 0,
     bottom: 0,
     width: '100%',
-    backgroundColor: theme.palette.backgroundSecondary[theme.palette.type],
-    color: theme.palette.secondary[theme.palette.type],
+    backgroundColor: theme.palette.background.main,
+    color: theme.palette.primary.main,
     [theme.breakpoints.up('sm')]: {
       width: props => `${props.menuWidth}px`
     },
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   head: {
     height: theme.customVariables.headerHeightMobile,
     padding: `0 ${theme.spacing(2)}px`,
-    borderBottom: `1px solid ${theme.palette.borderLine[theme.palette.type]}`,
+    borderBottom: `1px solid ${theme.palette.borderLine.main}`,
     [theme.breakpoints.up('md')]: {
       height: theme.customVariables.headerHeightDesktop,
     },
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   closeIcon: {
-    fill: theme.palette.secondary[theme.palette.type],
+    fill: theme.palette.primary.main,
   }
 }));
 

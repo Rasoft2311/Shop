@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
   counterButton: {
     margin: `${theme.spacing(1)}px 0`,
-    border: `1px solid ${theme.palette.secondary[theme.palette.type]}`,
+    border: `1px solid ${theme.palette.primary.main}`,
     borderRadius: '2px'
   },
   counterIcon: {
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     margin: `0 ${theme.spacing(1)}px`
   },
   icon: {
-    fill: theme.palette.secondary[theme.palette.type],
+    fill: theme.palette.primary.main,
   }
 }));
 

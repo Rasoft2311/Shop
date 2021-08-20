@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   categoriesHeader: {
     width: '100%',
     height: theme.customVariables.headerHeightMobile,
-    backgroundColor: theme.palette.backgroundSecondary[theme.palette.type],
+    backgroundColor: theme.palette.background.main,
     boxShadow: '0 0 30px rgb(0 0 0 / 60%)',
     [theme.breakpoints.up('md')]: {
       position: 'fixed',
@@ -35,15 +35,15 @@ const useStyles = makeStyles((theme) => ({
       display: 'block',
       width: '100%',
       padding: 0,
-      borderRight: `1px solid ${theme.palette.secondary[theme.palette.type]}`,
+      borderRight: `1px solid ${theme.palette.primary.main}`,
       overflowX: 'hidden',
       overflowY: 'auto',
       whiteSpace: 'initial',
       '&:hover': {
         width: '200px',
-        "& $name": {
-          display: 'block'
-        }
+        // "& $name": {
+        //   display: 'block'
+        // }
       },
     },
   },
@@ -60,32 +60,34 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     height: '100%',
     padding: '15px',
+    [theme.breakpoints.up('md')]: {
+      padding: '20px',
+    },
   },
   name: {
     marginLeft: '10px',
-    color: theme.palette.secondary[theme.palette.type],
+    color: theme.palette.primary.main,
     [theme.breakpoints.up('md')]: {
-      display: 'none',
       width: '105px',
       flexShrink: '0',
-      marginLeft: '15px'
+      marginLeft: '20px'
     },
     
   },
   icon: {
     width:'auto',
     height: '100%',
-    fill: theme.palette.secondary[theme.palette.type],
+    fill: theme.palette.primary.main,
     [theme.breakpoints.up('md')]: {
       flexShrink: 0,
       display: 'block',
-      width:`${theme.customVariables.headerHeightDesktop - 30}px`,
+      width:`${theme.customVariables.headerHeightDesktop - 40}px`,
       padding: 0,
     },
   }
 }));
 
-export const CategoriesHeader = ({ extendedClass }) => {
+export const CategoriesHeader = () => {
   const classes = useStyles();
   return (
     <nav className={classes.categoriesHeader}>
@@ -125,6 +127,6 @@ export const CategoriesHeader = ({ extendedClass }) => {
   );
 };
 
-CategoriesHeader.propTypes = {
-  extendedClass: PropTypes.string
-};
+// CategoriesHeader.propTypes = {
+//   extendedClass: PropTypes.string
+// };

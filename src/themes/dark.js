@@ -14,34 +14,32 @@ export const darkTheme = createTheme({
     fontFamily: ['CeraPro','Roboto', 'Helvetica', 'Arial', 'sans-serif'].join(','),
   },
   palette: {
-    type: 'dark',
+    type: 'light',
     primary: {
-      main: '#fff',
-      dark: '#fff'
+      main: '#000'
     },
     secondary: {
-      main: '#000',
-      dark: '#000'
+      main: '#fff',
+      light: '#323232',
+      dark: '#37353b'
     },
     third: {
       main: '#FF0000',
-      dark: '#FF0000'
     },
     additional: {
-      main: '#00FF00',
-      dark: '#00FF00'
+      main: '#00FF00'
     },
     backgroundTransparent: {
-      dark: 'rgba(0, 0, 0, 0.7)'
+      main: 'rgba(0, 0, 0, 0.7)'
     },
     background: {
-      dark: '#000'
+      main: '#fff'
     },
     backgroundSecondary: {
-      dark: '#fff'
+      main: '#000'
     },
     borderLine: {
-      dark: 'rgba(0,0,0,0.2)'
+      main: 'rgba(0,0,0,0.2)'
     }
   },
   overrides: {

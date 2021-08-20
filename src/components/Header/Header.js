@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import ShopLogo from '@assets/icons/shop-logo.svg';
 import FacebookLogo from '@assets/icons/facebook-logo.svg';
 import InstagramLogo from '@assets/icons/instagram-logo.svg';
@@ -5,13 +6,13 @@ import TwitterLogo from '@assets/icons/twitter-logo.svg';
 import { Grid, Hidden, IconButton, Link, makeStyles } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import PersonIcon from '@material-ui/icons/Person';
 import { CategoriesHeader } from '../Categories';
-import clsx from 'clsx';
 import { ModalMenuContainer } from '../Modal';
 import { ModalMenu } from '../Modal/ModalMenu';
-import { NavigationList } from '../List';
 import { ShoppingCart } from '../ShoppingCart';
-
+import { Navigation } from '../Navigation';
+import { Link as BrowserLink} from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -20,11 +21,12 @@ const useStyles = makeStyles((theme) => ({
     top: '0',
     left: '0',
     right: '0',
+    zIndex: 10
   },
   inner: {
     height: theme.customVariables.headerHeightMobile,
     padding: `0 ${theme.spacing(2)}px`,
-    backgroundColor: theme.palette.background[theme.palette.type],
+    backgroundColor: theme.palette.backgroundSecondary.main,
     [theme.breakpoints.up('md')]: {
       height: theme.customVariables.headerHeightDesktop,
     },
@@ -38,7 +40,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   icon: {
-    fill: theme.palette.primary[theme.palette.type],
+    display: 'block',
+    fill: theme.palette.secondary.main,
   },
   innerItem: {
     marginRight: theme.spacing(2)
@@ -57,7 +60,8 @@ const useStyles = makeStyles((theme) => ({
     height: '15px',
     borderRadius: '50%',
     fontSize: '.53rem',
-    backgroundColor: theme.palette.third[theme.palette.type],
+    backgroundColor: theme.palette.third.main,
+    color: theme.palette.secondary.main,
   }
 }));
 
@@ -80,11 +84,16 @@ export const Header = () => {
           </Grid>
         </Hidden>
         <Grid className={classes.logoWrap} item container xs={2} justifyContent='center' alignItems="center">
-          <Link href="#" className={classes.logo} aria-label="open our main page">
+          <Link to="/" className={classes.logo} component={BrowserLink} aria-label="open our main page">
             <ShopLogo className={classes.icon}/>
           </Link>
         </Grid>
         <Grid item container xs={10} sm={5} justifyContent="flex-end" alignItems="center">
+          <div className={classes.innerItem}>
+            <Link to="/sign-in" component={BrowserLink} aria-label="open sign in main page">
+              <PersonIcon className={classes.icon} />
+            </Link>
+          </div>
           <div className={classes.innerItem}>
             <ModalMenuContainer>
                 {({ isMenuOpened, onMenuToggle }) => (
@@ -110,7 +119,7 @@ export const Header = () => {
                     <MenuIcon className={classes.icon}/>
                   </IconButton>
                   <ModalMenu menuWidth='300' isMenuOpened={isMenuOpened} onMenuToggle={onMenuToggle} title="Меню">
-                    <NavigationList/>
+                    <Navigation/>
                   </ModalMenu>
                 </>
               )}

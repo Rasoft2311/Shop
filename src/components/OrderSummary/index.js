@@ -1,1 +1,1 @@
-export { OrderSummary } from './OrderSummary';
+export { OrderSummaryContainer } from './OrderSummaryContainer';

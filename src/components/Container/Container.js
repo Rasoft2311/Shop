@@ -9,16 +9,16 @@ const useStyles = makeStyles((theme) => ({
       maxWidth: ''  
     },
     [theme.breakpoints.only('sm')]: {
-      backgroundColor: theme.palette.secondary.main,
+      backgroundColor: theme.palette.primary.main,
     },
     [theme.breakpoints.only('md')]: {
-      backgroundColor: theme.palette.secondary.main,
+      backgroundColor: theme.palette.primary.main,
     },
     [theme.breakpoints.only('lg')]: {
-      backgroundColor: theme.palette.secondary.main,
+      backgroundColor: theme.palette.primary.main,
     },
     [theme.breakpoints.only('xl')]: {
-      backgroundColor: theme.palette.secondary.main,
+      backgroundColor: theme.palette.primary.main,
     },
   },
 }));
