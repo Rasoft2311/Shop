@@ -7,37 +7,48 @@ const UserScheme = new Schema(
   {
     firstName: {
       type: String,
-      required: [true, "forgot to enter first name"],
+      required: true,
     },
     lastName: {
       type: String,
-      required: [true, "forgot to enter last name"],
+      required: true,
     },
     email: {
       type: String,
-      required: [true, "forgot to enter login"],
+      required: true,
     },
     password: {
       type: String,
-      required: [true, "forgot to enter password"],
+      required: true,
     },
     role: {
       type: String,
       default: "user",
       enum: ["admin", "user", "worker"],
     },
+    isVerified: {
+      type: Boolean,
+      default: false
+    },
+    createdAt: {
+      type: Date
+    },
+    verificationId: {
+      type: String
+    }
   }
 );
+UserScheme.index({"createdAt": 1 }, { expireAfterSeconds: 60 } );
 
 UserScheme.pre('save', async function(next) {
   try {
     const user = this;
     if (!user.isModified('password')) return next();
-    const hashedPassword = await bcrypt.hash(user.password, 12);
+    const hashedPassword = await bcrypt.hash(user.password, Number(process.env.BCRYPT_SALT_ROUNDS));
     user.password = hashedPassword;
     next();
   } catch(err) {
-    next(err);
+    return next(ServerError.internalError(err));
   }
 });
 module.exports = mongoose.model("users", UserScheme);

@@ -1,7 +1,7 @@
 const ServerError = require('../utils/errors/ServerError');
 
 const unsupportedMethodHandler = (req, res, next) => {
-  next(ServerError.methodNotAllowed('This method is not allowed'));
+  next(ServerError.methodNotAllowed());
 };
 
 module.exports = unsupportedMethodHandler;

@@ -1,19 +1,16 @@
 const mongoose = require('mongoose');
+const isProduction = process.env.NODE_ENV === 'production';
 
-// connect to db
-const connection = mongoose.connect(
-  process.env.MONGO_URI,
-  { useNewUrlParser: true, useUnifiedTopology: true },
-).then(m => m.connection.getClient())
-.catch(err => console.log(err));
-// try {
-//   connection = await mongoose.connect(
-//     process.env.MONGO_URI,
-//     { useNewUrlParser: true, useUnifiedTopology: true },
-//   );
-//   connection = connection.getClient();
-// } catch(err) {
-//   console.log(err);
-// }
+async function getDbConnection() {
+  try {
+    let c = await mongoose.connect(
+      process.env.MONGO_URI,
+      { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
+    );
+    return c.connection.getClient();
+  } catch(err) {
+    if(!isProduction) console.log(err);
+  }
+}
 
-module.exports = connection;
+module.exports = getDbConnection;
