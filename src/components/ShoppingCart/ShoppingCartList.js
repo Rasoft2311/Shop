@@ -1,5 +1,7 @@
 import { List, ListItem, makeStyles } from '@material-ui/core';
+import { connect } from 'react-redux';
 import { ProductCart } from '../Product';
+import { addProductToCart, removeProductFromCart, removeFullProductFromCart } from '../../store/Cart/actions';
 
 const useStyles = makeStyles((theme) => ({
   shoppingCartList: {
@@ -15,22 +17,30 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '10px',
     color: theme.palette.primary.main,
     textAlign: 'center',
-    "&:last-child": {
+    '&:last-child': {
       marginBottom: 0,
     }
   },
 }));
 
-export const ShoppingCartList = (props) => {
+const ShoppingCartList = ({products, addProductToCart, removeProductFromCart, removeFullProductFromCart}) => {
   const classes = useStyles();
   return (
     <List className={classes.shoppingCartList} disablePadding>
-      <ListItem className={classes.item} disableGutters>
-          <ProductCart />
-      </ListItem>
-      <ListItem className={classes.item} disableGutters>
-          <ProductCart />
-      </ListItem>
+      {products.map((product) => (
+        <ListItem key={product._id} className={classes.item} disableGutters>
+          <ProductCart product={product} addProductToCart={addProductToCart} removeProductFromCart={removeProductFromCart} removeFullProductFromCart={removeFullProductFromCart}/>
+        </ListItem>
+      ))}
     </List>
   );
 };
+const mapStateToProps = (state) => ({ products: state.cart.products });
+
+const mapDispatchToProps  = {
+  addProductToCart,
+  removeProductFromCart,
+  removeFullProductFromCart
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartList);

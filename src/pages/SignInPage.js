@@ -1,9 +1,9 @@
-import { SignIn } from '../components/SignIn';
+import { SignInContainer } from '../components/SignIn';
 
 export const SignInPage = () => {
   return (
     <>
-      <SignIn/>
+      <SignInContainer/>
     </>
   );
 };

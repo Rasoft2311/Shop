@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const ServerError = require('../utils/errors/ServerError');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
@@ -23,8 +23,8 @@ const UserScheme = new Schema(
     },
     role: {
       type: String,
-      default: "user",
-      enum: ["admin", "user", "worker"],
+      default: 'user',
+      enum: ['admin', 'user', 'worker'],
     },
     isVerified: {
       type: Boolean,
@@ -38,7 +38,7 @@ const UserScheme = new Schema(
     }
   }
 );
-UserScheme.index({"createdAt": 1 }, { expireAfterSeconds: 60 } );
+UserScheme.index({'createdAt': 1 }, { expireAfterSeconds: 60 } );
 
 UserScheme.pre('save', async function(next) {
   try {
@@ -51,4 +51,4 @@ UserScheme.pre('save', async function(next) {
     return next(ServerError.internalError(err));
   }
 });
-module.exports = mongoose.model("users", UserScheme);
+module.exports = mongoose.model('users', UserScheme);

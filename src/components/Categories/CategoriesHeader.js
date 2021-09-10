@@ -3,7 +3,6 @@ import MeatIcon from '@assets/icons/meat-icon.svg';
 import DrinksIcon from '@assets/icons/drinks-icon.svg';
 import SauceIcon from '@assets/icons/sauce-icon.svg';
 import BakeryIcon from '@assets/icons/bakery-icon.svg';
-import PropTypes from 'prop-types';
 import { Link, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -41,9 +40,6 @@ const useStyles = makeStyles((theme) => ({
       whiteSpace: 'initial',
       '&:hover': {
         width: '200px',
-        // "& $name": {
-        //   display: 'block'
-        // }
       },
     },
   },
@@ -126,7 +122,3 @@ export const CategoriesHeader = () => {
     </nav>
   );
 };
-
-// CategoriesHeader.propTypes = {
-//   extendedClass: PropTypes.string
-// };

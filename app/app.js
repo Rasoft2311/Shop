@@ -12,36 +12,13 @@ const errorHandler = require('./middleware/errorHandler');
 const unsupportedMethodHandler = require('./middleware/unsupportedMethodHandler');
 const adminRouter = require('./routes/adminRouter.js');
 const apiRouter = require('./routes/apiRouter');
-const nodemailer = require('nodemailer');
-
 const getDbConnection = require('./config/database');
 
 
-
 function startServer(port) {
-
-  // const transporter = nodemailer.createTransport({
-  //   host: 'smtp.gmail.com',
-  //   port: process.env.NODE_ENV === 'development' ? 587 : 465,
-  //   secure: process.env.NODE_ENV !== 'development',
-  //   auth: {
-  //     user: 'danieltestshop@gmail.com',
-  //     pass: '23vaskusmes74er4',
-  //   },
-  // });
-  
-  // transporter.sendMail({
-  //     from: '"Daniel" <danieltestshop@gmail.com>',
-  //     to: 'impulsifier1999@gmail.com',
-  //     subject: 'Message',
-  //     text: 'I hope this message gets delivered!'
-  // }, (err, info) => {
-  //     console.log(info.envelope);
-  //     console.log(info.messageId);
-  // });
-
-
   const app = express();
+
+  app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
   // set path to static files
   // app.use(express.static(path.join(__dirname, "../build")));
@@ -90,7 +67,7 @@ function startServer(port) {
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 120000 },
+    cookie: { maxAge: 1200000 },
     store: sessionStore
   }));
 
@@ -104,7 +81,7 @@ function startServer(port) {
   // define routes
   app.use('/api', apiRouter);
   app.use('/admin', adminRouter);
-
+  
   // manage unsupported methods
   app.use(unsupportedMethodHandler);
 

@@ -4,6 +4,8 @@ const ApiError = require('../utils/errors/ApiError');
 const ServerError = require('../utils/errors/ServerError');
 const passport = require('passport');
 const bcrypt = require('bcrypt');
+const transporter = require('../config/nodemailer');
+const getSiteUrl = require('../utils/helpers/siteUrl');
 
 
 class AuthController {
@@ -16,7 +18,7 @@ class AuthController {
           message: 'You did not verify your account'
         });
         req.logIn(user, function(err) {
-          if (err) return next(err);
+          if (err) return next(ServerError.internalError(err));
           return res.status(200).json({
             success: true,
             user: {
@@ -26,12 +28,20 @@ class AuthController {
             }
           });
         });
+        return;
       }
       return res.status(200).json({
         success: false,
         message: 'Wrong credentials'
       });
     })(req, res, next);
+  }
+
+  async signOut(req, res, next) {
+    req.logout();
+    return res.status(200).json({
+      success: true
+    });
   }
 
   async signUp(req, res, next) {
@@ -54,6 +64,12 @@ class AuthController {
       });
       user.verificationId = await bcrypt.hash(String(user._id), Number(process.env.BCRYPT_SALT_ROUNDS));
       await user.save();
+      await transporter.sendMail({
+          from: '"Daniel" <danieltestshop@gmail.com>',
+          to: email,
+          subject: 'Registration on testShop.com.ua',
+          text: `To finish your registration follow this link ${getSiteUrl(req, false)}/api/verify?id=${user.verificationId}`
+      });
       return res.status(201).json({
         success: true
       });
@@ -76,32 +92,40 @@ class AuthController {
             success: true
           });
         }
-        return next(ApiError.forbidden());
+        return next(ApiError.badRequest());
       } catch(err) {
         return next(ServerError.internalError(err));
       }
     } else {
-      return next(ApiError.forbidden());
+      return next(ApiError.badRequest());
     }
   }
 
   async resetPassword(req, res, next) {
     try {
-      const { email, password } = req.body;
+      const { email, password, passwordCopy } = req.body;
       let user = await User.findOne({email});
-      if(!user) {
-        return next(ApiError.badRequest('No user was found with such email address'));
-      }
-      let userResetLink = await ResetPasswordLink.findOne({user: user._id});
-      if(userResetLink) {
-        return next(ApiError.badRequest('Email was already sent to verify your password change'));
-      }
+      if(!user) return res.status(200).json({
+        success: false,
+        message: 'No user was found with such email address'
+      });
+      const userResetLink = await ResetPasswordLink.findOne({user: user._id});
+      if(userResetLink) return res.status(200).json({
+        success: false,
+        message: 'Email was already sent to verify your password change'
+      });
       const resetPasswordLink = new ResetPasswordLink({
         user,
         password,
         link: await bcrypt.hash(String(user._id), Number(process.env.BCRYPT_SALT_ROUNDS))
       });
       await resetPasswordLink.save();
+      await transporter.sendMail({
+        from: '"Daniel" <danieltestshop@gmail.com>',
+        to: email,
+        subject: 'Password change on testShop.com.ua',
+        text: `To submit your password change follow this link ${getSiteUrl(req, false)}/api/submit-password-reset?id=${resetPasswordLink.link}`
+      });
       return res.status(201).json({
         success: true,
         message: 'Email was sent to verify your password change'
@@ -118,19 +142,18 @@ class AuthController {
         let resetLink = await ResetPasswordLink.findOne({link}).populate('user');
         if(resetLink) {
           resetLink.user.password = resetLink.password;
-          console.log(resetLink.user.expireAt);
           await resetLink.user.save();
           await resetLink.remove();
           return res.status(200).json({
             success: true
           });
         }
-        return next(ApiError.forbidden());
+        return next(ApiError.badRequest());
       } catch(err) {
         return next(ServerError.internalError(err));
       }
     } else {
-      return next(ApiError.forbidden());
+      return next(ApiError.badRequest());
     }
   }
 }

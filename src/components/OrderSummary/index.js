@@ -1,1 +1,1 @@
-export { OrderSummaryContainer } from './OrderSummaryContainer';
+export { default as OrderSummary } from './OrderSummary';

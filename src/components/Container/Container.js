@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core';
-import { checkPropTypes } from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -30,8 +29,4 @@ export const Container = (props) => {
       {props.children}
     </div>
   );
-};
-
-Container.propTypes = {
-  children: checkPropTypes.node.isRequired,
 };

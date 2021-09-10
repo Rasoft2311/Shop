@@ -1,8 +1,6 @@
 import { makeStyles } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
-import PropTypes from 'prop-types';
-import { ShoppingCartListContainer } from './ShoppingCartListContainer';
-import { OrderSummaryContainer } from '../OrderSummary';
+import { default as ShoppingCartList } from './ShoppingCartList';
+import { OrderSummary } from '../OrderSummary';
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -21,20 +19,11 @@ export const ShoppingCart = () => {
   return (
     <>
       <div className={classes.list}>
-        <ShoppingCartListContainer />
+        <ShoppingCartList />
       </div>
       <div className={classes.orderSummary}>
-        <OrderSummaryContainer/>
+        <OrderSummary/>
       </div>
     </>
   );
 };
-
-// ModalMenu.propTypes = {
-//   children: PropTypes.node.isRequired,
-//   scrollableElRef: PropTypes.oneOfType([
-//     PropTypes.func, 
-//     PropTypes.shape({ current: PropTypes.instanceOf(Element) })
-//   ]),
-//   title: PropTypes.string.isRequired
-// };

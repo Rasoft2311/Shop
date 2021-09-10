@@ -46,7 +46,7 @@ module.exports = {
     },
     minimize: true,
     minimizer: [
-      `...`,
+      '...',
       new CssMinimizerPlugin(),
     ],
   },
@@ -56,4 +56,4 @@ module.exports = {
     maxAssetSize: 512000
   },
   target: 'browserslist',
-}
+};

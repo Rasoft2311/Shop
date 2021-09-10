@@ -1,8 +1,7 @@
-import { Grid, IconButton, Link, List, ListItem, makeStyles, Typography } from '@material-ui/core';
+import { Grid, IconButton, makeStyles, Typography } from '@material-ui/core';
 import CancelIcon from '@material-ui/icons/Cancel';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
-import productImage from '@assets/images/product-small.jpeg';
 import clsx from 'clsx';
 
 const useStyles = makeStyles((theme) => ({
@@ -39,28 +38,29 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export const ProductCart = () => {
+export const ProductCart = ({product, addProductToCart, removeProductFromCart, removeFullProductFromCart}) => {
   const classes = useStyles();
+  const {image, title, amount, price, currency } = product;
   return (
     <Grid container alignItems="center">
       <Grid xs={4} item>
-        <img className={classes.img} src={productImage} />
+        <img className={classes.img} src={image} alt="Product"/>
       </Grid>
       <Grid xs={7} item className={classes.control}>
-        <Typography variant="h4" component="h3" >Burger XXL</Typography>
+        <Typography variant="h4" component="h3" >{title}</Typography>
         <Grid container justifyContent="center" alignItems="center" className={classes.counterButtons}>
-          <IconButton className={classes.counterButton} aria-label="remove one instance of this product">
+          <IconButton className={classes.counterButton} aria-label="remove one instance of this product" onClick={() => removeProductFromCart(product)}>
             <RemoveIcon className={clsx(classes.icon, classes.counterIcon)}/>
           </IconButton>
-          <Typography className={classes.counterAmount} variant="body1" component="span" >1</Typography>
-          <IconButton className={classes.counterButton} aria-label="add one instance of this product">
+          <Typography className={classes.counterAmount} variant="body1" component="span" >{amount}</Typography>
+          <IconButton className={classes.counterButton} aria-label="add one instance of this product" onClick={() => addProductToCart(product)}>
             <AddIcon className={clsx(classes.icon, classes.counterIcon)}/>
           </IconButton>
         </Grid>
-        <Typography variant="body1" component="p" >300$</Typography>
+        <Typography variant="body1" component="p" >{price*amount}{currency}</Typography>
       </Grid>
       <Grid xs={1} container item justifyContent="flex-end">
-        <IconButton aria-label="remove item from cart">
+        <IconButton aria-label="remove item from cart" onClick={() => removeFullProductFromCart(product)}>
           <CancelIcon className={clsx(classes.icon,classes.closeIcon)}/>
         </IconButton>
       </Grid>

@@ -1,6 +1,5 @@
 import { makeStyles } from '@material-ui/core';
 import clsx from 'clsx';
-import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -29,9 +28,4 @@ export const Paper = ({ children, className }) => {
       {children}
     </div>
   );
-};
-
-Paper.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string
 };

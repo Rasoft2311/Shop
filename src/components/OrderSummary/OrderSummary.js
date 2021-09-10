@@ -1,4 +1,5 @@
-import { Button, Grid, Link, List, ListItem, makeStyles, Typography } from '@material-ui/core';
+import { Button, Grid, makeStyles, Typography } from '@material-ui/core';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   orderSummary: {
@@ -22,19 +23,21 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export const OrderSummary = () => {
+const OrderSummary = ({price}) => {
   const classes = useStyles();
   return (
     <div className={classes.orderSummary}>
       <Grid container justifyContent="space-between">
         <Grid item className={classes.inner}>
           <Typography variant="h2" component="h3">Сума</Typography>
-          <Typography className={classes.amount} variant="h2" component="p">300$</Typography>
+          <Typography className={classes.amount} variant="h2" component="p">{price}$</Typography>
         </Grid>
         <Grid item>
-          <Button variant="contained" color="secondary">Замовити</Button>
+          <Button disabled={price === 0} variant="contained" color="primary">Замовити</Button>
         </Grid>
       </Grid>
     </div>
   );
 };
+
+export default connect(state => ({price: state.cart.price}), null)(OrderSummary);

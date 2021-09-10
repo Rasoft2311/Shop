@@ -15,4 +15,4 @@ module.exports = env => {
     default:
       throw new Error('No matching configuration was found!');
   }
-}
+};

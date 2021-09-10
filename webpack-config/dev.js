@@ -10,13 +10,18 @@ module.exports =  {
     `${path.src}/index.js`,
   ].filter(Boolean),
   mode: 'development',
-  devtool: 'inline-source-map',
+  devtool: 'eval-cheap-module-source-map',
   devServer: {
     contentBase: path.public,
     watchContentBase: true,
     publicPath: '/',
     compress: true,
     historyApiFallback: true,
+    proxy: {
+    '/api': {
+        target: 'http://localhost:4000',
+      },
+    },
     open: true,
     hot: true,
     port: 3000,

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ResetPasswordLinkScheme = new Schema(
@@ -22,6 +22,6 @@ const ResetPasswordLinkScheme = new Schema(
     },
   }
 );
-ResetPasswordLinkScheme.index({"createdAt": 1 }, { expireAfterSeconds: 60 } );
+ResetPasswordLinkScheme.index({'createdAt': 1 }, { expireAfterSeconds: 60 } );
 
-module.exports = mongoose.model("reset_password_links", ResetPasswordLinkScheme);
+module.exports = mongoose.model('reset_password_links', ResetPasswordLinkScheme);

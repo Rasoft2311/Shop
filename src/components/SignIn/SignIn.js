@@ -11,7 +11,7 @@ import Container from '@material-ui/core/Container';
 import { Form, Formik } from 'formik';
 import { Link as BrowserLink} from 'react-router-dom';
 import { Paper } from '../Paper';
-import { signInSchema } from '../../../validation';
+import { signInSchema } from '../../../validation/front';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    [theme.breakpoints.down('xs')]: {
+      padding: theme.spacing(3),
+    },
   },
   avatar: {
     margin: theme.spacing(1),
@@ -31,10 +34,13 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-  },
+  }, 
+  error: {
+    marginTop: '15px'
+  }
 }));
 
-export const SignIn = () => {
+export const SignIn = ({submitHandler, initialValues, error}) => {
   const classes = useStyles();
 
   return (
@@ -45,41 +51,42 @@ export const SignIn = () => {
         </Avatar>
         <Typography component="h1" variant="h2" color="primary">Sign in</Typography>
         <Formik 
-          initialValues={{
-            email: '',
-            password: ''
-          }}
-          onSubmit={(data) => {
-            console.log(data);
-          }}
+          initialValues={initialValues}
+          onSubmit={submitHandler}
           validationSchema={signInSchema}
           >
-          <Form className={classes.form} noValidate>
-            <TextField type="input" name="email" label="Email Address" id="email" />
-            <TextField type="input" name="password" label="Password" id="password" />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Sign In
-            </Button>
-          </Form>
+          {({ isSubmitting }) => (
+            <Form className={classes.form} noValidate>
+              <TextField type="input" name="email" label="Email Address" id="email" />
+              <TextField type="password" name="password" label="Password" id="password" />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                disabled={isSubmitting}
+                className={classes.submit}
+              >
+                Sign In
+              </Button>
+            </Form>
+          )}
         </Formik>
         <Grid container>
-            <Grid item xs>
-              <Link to="/reset-passport" component={BrowserLink} variant="body2" color="primary">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link to="/sign-up" component={BrowserLink} variant="body2" color="primary">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
+          <Grid item xs>
+            <Link to="/reset-password" component={BrowserLink} variant="body2" color="primary">
+              Forgot password?
+            </Link>
           </Grid>
+          <Grid item>
+            <Link to="/sign-up" component={BrowserLink} variant="body2" color="primary">
+              {"Don't have an account? Sign Up"}
+            </Link>
+          </Grid>
+        </Grid>
+        {error && 
+          <Typography className={classes.error} variant="body2" color="error">{error}</Typography>
+        }
       </Paper>
     </Container>
   );

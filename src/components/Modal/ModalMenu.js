@@ -1,6 +1,5 @@
-import { Grid, IconButton, makeStyles, Modal, Typography, Fade, Slide } from '@material-ui/core';
+import { Grid, IconButton, makeStyles, Modal, Typography, Slide } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
   modalMenuInner: {
@@ -59,13 +58,4 @@ export const ModalMenu = ({onMenuToggle, isMenuOpened, children, title, menuWidt
       </Slide>
     </Modal>
   );
-};
-
-ModalMenu.propTypes = {
-  children: PropTypes.node.isRequired,
-  scrollableElRef: PropTypes.oneOfType([
-    PropTypes.func, 
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) })
-  ]),
-  title: PropTypes.string.isRequired
 };

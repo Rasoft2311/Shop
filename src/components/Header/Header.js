@@ -3,7 +3,7 @@ import ShopLogo from '@assets/icons/shop-logo.svg';
 import FacebookLogo from '@assets/icons/facebook-logo.svg';
 import InstagramLogo from '@assets/icons/instagram-logo.svg';
 import TwitterLogo from '@assets/icons/twitter-logo.svg';
-import { Grid, Hidden, IconButton, Link, makeStyles } from '@material-ui/core';
+import { Grid, Hidden, IconButton, Link, makeStyles, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PersonIcon from '@material-ui/icons/Person';
@@ -13,6 +13,9 @@ import { ModalMenu } from '../Modal/ModalMenu';
 import { ShoppingCart } from '../ShoppingCart';
 import { Navigation } from '../Navigation';
 import { Link as BrowserLink} from 'react-router-dom';
+import { useAuth } from '../../hoc/ProvideAuth';
+import { Spinner } from '../Spinner';
+import { connect } from 'react-redux';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -62,11 +65,16 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '.53rem',
     backgroundColor: theme.palette.third.main,
     color: theme.palette.secondary.main,
+  },
+  signIn: {
+    display: 'flex',
+    alignItems: 'center'
   }
 }));
 
-export const Header = () => {
+const Header = ({cartProducts}) => {
   const classes = useStyles();
+  const { user } = useAuth();
   return (
     <header className={classes.header}>
       <Grid container className={classes.inner}>
@@ -90,9 +98,14 @@ export const Header = () => {
         </Grid>
         <Grid item container xs={10} sm={5} justifyContent="flex-end" alignItems="center">
           <div className={classes.innerItem}>
-            <Link to="/sign-in" component={BrowserLink} aria-label="open sign in main page">
+            {user === null ? 
+            <Spinner color='secondary' width='40px' height='40px'/>
+            :
+            <Link to={user ? '/profile' : '/sign-in'} component={BrowserLink} className={classes.signIn} aria-label="open sign in main page">
               <PersonIcon className={classes.icon} />
+              <Typography variant='h4' component='div' color="secondary">{user ? user.firstName : 'Войти'}</Typography>
             </Link>
+            }
           </div>
           <div className={classes.innerItem}>
             <ModalMenuContainer>
@@ -101,7 +114,7 @@ export const Header = () => {
                     <IconButton onClick={onMenuToggle} aria-label="open shopping cart">
                       <ShoppingCartIcon className={clsx(classes.icon, classes.cartIcon)}/>
                       <span className={classes.cartAmount}>
-                        0
+                        {cartProducts.length}
                       </span>
                     </IconButton>
                     <ModalMenu menuWidth='400' isMenuOpened={isMenuOpened} onMenuToggle={onMenuToggle} title="Кошик">
@@ -131,3 +144,5 @@ export const Header = () => {
     </header>
   );
 };
+
+export default connect(state => ({cartProducts: state.cart.products}), null)(Header);

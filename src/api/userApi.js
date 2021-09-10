@@ -1,17 +1,78 @@
 import axios from 'axios';
-import { GET_USER_INFO } from './variables';
+import { CURRENT_USER, SIGN_IN, SIGN_UP, SIGN_OUT, RESET_PASSWORD } from './variables';
 
-export const getUser = (successCallback, errorCallback) => {
+export const getCurrentUserInfo = (successCallback, errorCallback) => {
   return new Promise((resolve, reject) => {
     axios
-    .get(GET_USER_INFO)
+    .get(CURRENT_USER)
     .then((res) => {
-      console.log("getUserInfo > axios res=", res);
       resolve(res.data);
     })
     .catch((err) => {
-      console.log("getUserInfo > axios err=", err);
       reject(err);
     });
   });
 };
+
+export const apiSignIn = (data) => {
+  return new Promise((resolve, reject) => {
+    axios
+    .post(SIGN_IN, data)
+    .then((res) => {
+      resolve(res.data);
+    })
+    .catch((err) => {
+      reject(err);
+    });
+  });
+};
+
+export const apiSignUp = (data) => {
+  return new Promise((resolve, reject) => {
+    axios
+    .post(SIGN_UP, data)
+    .then((res) => {
+      resolve(res.data);
+    })
+    .catch((err) => {
+      reject(err);
+    });
+  });
+};
+
+export const apiSignOut = () => {
+  return new Promise((resolve, reject) => {
+    axios
+    .get(SIGN_OUT)
+    .then(() => resolve())
+    .catch((err) => reject(err));
+  });
+};
+
+export const apiResetPassword = (data) => {
+  return new Promise((resolve, reject) => {
+    axios
+    .post(RESET_PASSWORD, data)
+    .then((res) => {
+      resolve(res.data);
+    })
+    .catch((err) => {
+      reject(err);
+    });
+  });
+};
+
+export const apiEditUser = (data) => {
+  return new Promise((resolve, reject) => {
+    axios
+    .patch(CURRENT_USER, data)
+    .then((res) => {
+      resolve(res.data);
+    })
+    .catch((err) => {
+      reject(err);
+    });
+  });
+};
+
+

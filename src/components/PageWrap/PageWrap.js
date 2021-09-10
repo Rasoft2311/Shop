@@ -1,12 +1,11 @@
 import { makeStyles } from '@material-ui/core';
-import PropTypes from 'prop-types';
 import BackgroundImage from '@assets/images/app-background.jpg';
 import { Footer } from '../Footer';
 import { Header } from '../Header';
 
 const useStyles = makeStyles((theme) => ({
   pageWrap: {
-    color: theme.palette.secondary.main,
+    color: theme.palette.primary.main,
     backgroundSize: '400px',
     backgroundRepeat: 'repeat',
     backgroundImage: `url(${BackgroundImage})`,
@@ -41,8 +40,4 @@ export const PageWrap = (props) => {
       </div>
     </div>
   );
-};
-
-PageWrap.propTypes = {
-  children: PropTypes.node.isRequired,
 };

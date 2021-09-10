@@ -58,6 +58,9 @@ export const darkTheme = createTheme({
         },
         svg: {
           display: 'block'
+        },
+        'input[type=password]': {
+          letterSpacing: '0.15rem'
         }
       },
     },

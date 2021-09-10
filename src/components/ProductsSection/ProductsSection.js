@@ -1,5 +1,5 @@
 import { makeStyles, Typography } from '@material-ui/core';
-import { ProductsContainer } from '../Products';
+import { Products } from '../Products';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -13,7 +13,7 @@ export const ProductsSection = ({title}) => {
   return (
     <section>
       <Typography className={classes.title} variant="h1">{title}</Typography>
-      <ProductsContainer />
+      <Products />
     </section>
   );
-} 
+};

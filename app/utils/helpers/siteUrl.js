@@ -1,6 +1,5 @@
-function getSiteUrl(req) {
-  console.log(req.protocol, req.get('host'), req.originalUrl);
-  return req.protocol + '://' + req.get('host');
+function getSiteUrl(req, withOriginalUrl) {
+  return `${req.protocol}://${req.get('host')}${withOriginalUrl ? req.originalUrl : ''}`;
 }
 
 module.exports = getSiteUrl;
