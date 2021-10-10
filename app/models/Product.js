@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
-const ServerError = require('../utils/errors/ServerError');
 const Schema = mongoose.Schema;
-const bcrypt = require('bcrypt');
 
 const UploadedFile = new mongoose.Schema({
   path: String,
@@ -27,6 +25,10 @@ const ProductScheme = new Schema(
       required: true
     },
     price: {
+      type: Number,
+      required: true
+    },
+    popularity: {
       type: Number,
       required: true
     },

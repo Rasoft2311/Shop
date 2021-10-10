@@ -1,7 +1,7 @@
 import { Button, Container, makeStyles, Typography } from '@material-ui/core';
 import { Paper } from '../components/Paper';
-import profileImage from '@assets/images/profile.png';
-import { useAuth } from '../hoc/ProvideAuth';
+import ProfileImage from '@assets/images/profile.png';
+import { useAuth } from '../hooks/useAuth';
 import { EditFieldContainer } from '../components/Field';
 import { firstNameSchema, lastNameSchema, passwordSchema } from '../../validation/front';
 import { useRouter } from '../hooks/useRouter';
@@ -38,7 +38,7 @@ export const ProfilePage = () => {
   return (
     <Container component="div" maxWidth="md">
       <Paper className={classes.profilePage}>
-        <img className={classes.img} src={profileImage} alt="profile"/>
+        <img className={classes.img} src={ProfileImage} alt="profile"/>
         <Typography className={classes.title} variant='h1'>Профиль</Typography>
         <EditFieldContainer label="Email" title={auth.user.email} immutable={true}/>
         <EditFieldContainer label="First Name" title={auth.user.firstName} name='firstName' validationSchema={firstNameSchema}/>

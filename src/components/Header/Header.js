@@ -1,21 +1,12 @@
-import clsx from 'clsx';
-import ShopLogo from '@assets/icons/shop-logo.svg';
 import FacebookLogo from '@assets/icons/facebook-logo.svg';
 import InstagramLogo from '@assets/icons/instagram-logo.svg';
 import TwitterLogo from '@assets/icons/twitter-logo.svg';
-import { Grid, Hidden, IconButton, Link, makeStyles, Typography } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import PersonIcon from '@material-ui/icons/Person';
-import { CategoriesHeader } from '../Categories';
-import { ModalMenuContainer } from '../Modal';
-import { ModalMenu } from '../Modal/ModalMenu';
-import { ShoppingCart } from '../ShoppingCart';
-import { Navigation } from '../Navigation';
+import { Grid, Hidden, Link, makeStyles } from '@material-ui/core';
+import { HeaderCategories } from './HeaderCategories';
+import { HeaderProfile } from './HeaderProfile';
 import { Link as BrowserLink} from 'react-router-dom';
-import { useAuth } from '../../hoc/ProvideAuth';
-import { Spinner } from '../Spinner';
-import { connect } from 'react-redux';
+import { HeaderCart } from './HeaderCart';
+import { HeaderNavbar } from './HeaderNavbar';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -37,6 +28,13 @@ const useStyles = makeStyles((theme) => ({
       padding: `0 ${theme.spacing(3)}px`,
     },
   },
+  logo: {
+    color: theme.palette.secondary.main,
+    fontSize: '2rem',
+    '&:hover': {
+      opacity: 0.9
+    }
+  },
   logoWrap: {
     [theme.breakpoints.down('xs')]: {
       justifyContent: 'flex-start'
@@ -45,104 +43,51 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     display: 'block',
     fill: theme.palette.secondary.main,
+    '&:hover': {
+      opacity: 0.9
+    }
   },
   innerItem: {
     marginRight: theme.spacing(2)
   },
-  cartIcon: {
-    fontSize: '2.1rem'
-  },
-  cartAmount: {
-    position: 'absolute',
-    left: 0,
-    bottom: 0,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '15px',
-    height: '15px',
-    borderRadius: '50%',
-    fontSize: '.53rem',
-    backgroundColor: theme.palette.third.main,
-    color: theme.palette.secondary.main,
-  },
-  signIn: {
-    display: 'flex',
-    alignItems: 'center'
-  }
 }));
 
-const Header = ({cartProducts}) => {
+export const Header = () => {
   const classes = useStyles();
-  const { user } = useAuth();
   return (
     <header className={classes.header}>
       <Grid container className={classes.inner}>
         <Hidden xsDown>
           <Grid item container sm={5} alignItems="center" >
-            <Link href="#" className={classes.innerItem} aria-label="open our instagram page">
+            <Link href="https://instagram.com" className={classes.innerItem} aria-label="open our instagram page">
               <InstagramLogo className={classes.icon}/>
             </Link>
-            <Link href="#" className={classes.innerItem} aria-label="open our facebook page">
+            <Link href="https://facebook.com" className={classes.innerItem} aria-label="open our facebook page">
               <FacebookLogo className={classes.icon}/>
             </Link>
-            <Link href="#" className={classes.innerItem} aria-label="open our twitter page">
+            <Link href="https://twitter.com" className={classes.innerItem} aria-label="open our twitter page">
               <TwitterLogo className={classes.icon}/>
             </Link>
           </Grid>
         </Hidden>
         <Grid className={classes.logoWrap} item container xs={2} justifyContent='center' alignItems="center">
-          <Link to="/" className={classes.logo} component={BrowserLink} aria-label="open our main page">
-            <ShopLogo className={classes.icon}/>
+          <Link to="/" component={BrowserLink} aria-label="open our main page">
+            <span className={classes.logo}>Shop</span>
           </Link>
         </Grid>
         <Grid item container xs={10} sm={5} justifyContent="flex-end" alignItems="center">
           <div className={classes.innerItem}>
-            {user === null ? 
-            <Spinner color='secondary' width='40px' height='40px'/>
-            :
-            <Link to={user ? '/profile' : '/sign-in'} component={BrowserLink} className={classes.signIn} aria-label="open sign in main page">
-              <PersonIcon className={classes.icon} />
-              <Typography variant='h4' component='div' color="secondary">{user ? user.firstName : 'Войти'}</Typography>
-            </Link>
-            }
+            <HeaderProfile />
           </div>
           <div className={classes.innerItem}>
-            <ModalMenuContainer>
-                {({ isMenuOpened, onMenuToggle }) => (
-                  <>
-                    <IconButton onClick={onMenuToggle} aria-label="open shopping cart">
-                      <ShoppingCartIcon className={clsx(classes.icon, classes.cartIcon)}/>
-                      <span className={classes.cartAmount}>
-                        {cartProducts.length}
-                      </span>
-                    </IconButton>
-                    <ModalMenu menuWidth='400' isMenuOpened={isMenuOpened} onMenuToggle={onMenuToggle} title="Кошик">
-                      <ShoppingCart />
-                    </ModalMenu>
-                  </>
-              )}
-            </ModalMenuContainer>
+            <HeaderCart />
           </div>
           <div>
-            <ModalMenuContainer>
-              {({ isMenuOpened, onMenuToggle }) => (
-                <>
-                  <IconButton onClick={onMenuToggle} aria-label="open menu">
-                    <MenuIcon className={classes.icon}/>
-                  </IconButton>
-                  <ModalMenu menuWidth='300' isMenuOpened={isMenuOpened} onMenuToggle={onMenuToggle} title="Меню">
-                    <Navigation/>
-                  </ModalMenu>
-                </>
-              )}
-            </ModalMenuContainer>
+            <HeaderNavbar />
           </div>
         </Grid>
       </Grid>
-      <CategoriesHeader/>
+      <HeaderCategories/>
     </header>
   );
 };
-
-export default connect(state => ({cartProducts: state.cart.products}), null)(Header);

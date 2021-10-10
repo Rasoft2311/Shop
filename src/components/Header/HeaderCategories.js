@@ -4,6 +4,10 @@ import DrinksIcon from '@assets/icons/drinks-icon.svg';
 import SauceIcon from '@assets/icons/sauce-icon.svg';
 import BakeryIcon from '@assets/icons/bakery-icon.svg';
 import { Link, makeStyles } from '@material-ui/core';
+import { Link as BrowserLink} from 'react-router-dom';
+import { useRouter } from '../../hooks/useRouter';
+import { useRouteMatch } from 'react-router-dom';
+import clsx from 'clsx';
 
 const useStyles = makeStyles((theme) => ({
   categoriesHeader: {
@@ -34,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
       display: 'block',
       width: '100%',
       padding: 0,
-      borderRight: `1px solid ${theme.palette.primary.main}`,
+      boxShadow: '0 0 30px rgb(0 0 0 / 20%)',
       overflowX: 'hidden',
       overflowY: 'auto',
       whiteSpace: 'initial',
@@ -58,7 +62,14 @@ const useStyles = makeStyles((theme) => ({
     padding: '15px',
     [theme.breakpoints.up('md')]: {
       padding: '20px',
+      transition: 'background-colot 1s ease-in-out',
+      '&:hover': {
+        backgroundColor: theme.palette.backgroundThird.main,
+      },
     },
+  },
+  linkActive: {
+    backgroundColor: theme.palette.backgroundThird.main,
   },
   name: {
     marginLeft: '10px',
@@ -83,39 +94,43 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export const CategoriesHeader = () => {
+export const HeaderCategories = () => {
   const classes = useStyles();
+  const { query } = useRouter();
+  const match = useRouteMatch({
+    path: '/products',
+  });
   return (
     <nav className={classes.categoriesHeader}>
       <ul className={classes.list}>
         <li className={classes.item}>
-          <Link href="#" variant='h4' className={classes.link}>
+          <Link component={BrowserLink} to="/products" variant='h4' className={clsx(classes.link,{[classes.linkActive]: !query.category && match})}>
             <ProductsIcon className={classes.icon}/>
-            <span className={classes.name}>Всі продукти</span>
+            <span className={classes.name}>All products</span>
           </Link>
         </li>
         <li className={classes.item}>
-          <Link href="#" variant='h4' className={classes.link}>
+          <Link component={BrowserLink} to="/products?category=meat" variant='h4' className={clsx(classes.link,{[classes.linkActive]: query.category === 'meat' && match})}>
             <MeatIcon className={classes.icon}/>
-            <span className={classes.name}>М'ясо</span>
+            <span className={classes.name}>Meat</span>
           </Link>
         </li>
         <li className={classes.item}>
-          <Link href="#" variant='h4' className={classes.link}>
+          <Link component={BrowserLink} to="/products?category=bakery" variant='h4' className={clsx(classes.link,{[classes.linkActive]: query.category === 'bakery' && match})}>
             <BakeryIcon className={classes.icon}/>
-            <span className={classes.name}>Випічка</span>
+            <span className={classes.name}>Bakery</span>
           </Link>
         </li>
         <li className={classes.item}>
-          <Link href="#" variant='h4' className={classes.link}>
+          <Link component={BrowserLink} to="/products?category=drink" variant='h4' className={clsx(classes.link,{[classes.linkActive]: query.category === 'drink' && match})}>
             <DrinksIcon className={classes.icon}/>
-            <span className={classes.name}>Напої</span>
+            <span className={classes.name}>Drink</span>
           </Link>
         </li>
         <li className={classes.item}>
-          <Link href="#" variant='h4' className={classes.link}>
+          <Link component={BrowserLink} to="/products?category=sauce" variant='h4' className={clsx(classes.link,{[classes.linkActive]: query.category === 'sauce' && match})}>
             <SauceIcon className={classes.icon}/>
-            <span className={classes.name}>Соуси</span>
+            <span className={classes.name}>Sauce</span>
           </Link>
         </li>
       </ul>

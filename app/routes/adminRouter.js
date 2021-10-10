@@ -4,8 +4,6 @@ const AdminBro = require('admin-bro');
 const AdminBroExpress = require('admin-bro-expressjs');
 const AdminBroMongoose = require('@admin-bro/mongoose');
 const Product = require('../models/Product.js');
-const bcrypt = require('bcryptjs');
-const IS_PROD = process.env.NODE_ENV === 'production';
 const uploadFeature = require('@admin-bro/upload');
 const path = require('path');
 const User = require('../models/User.js');

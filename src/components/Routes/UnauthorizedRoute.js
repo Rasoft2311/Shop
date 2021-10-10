@@ -1,5 +1,5 @@
 import { Redirect, Route } from 'react-router-dom';
-import { useAuth } from '../../hoc/ProvideAuth';
+import { useAuth } from '../../hooks/useAuth';
 import { Spinner } from '../Spinner';
 
 export function UnauthorizedRoute({ children, ...rest }) {

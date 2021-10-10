@@ -86,7 +86,7 @@ export const ResetPassword = ({submitHandler, initialValues, isEmailSent, error}
               <Typography className={classes.error} variant="body2" color="error">{error}</Typography>
             }
           </>
-        : <EmailMessage message="Имейл с подтверждением был отправлен вам на почту, необходимо потдвердить смену пароля" />
+        : <EmailMessage message="Email with reset link was sent." />
         }
       </Paper>
     </Container>

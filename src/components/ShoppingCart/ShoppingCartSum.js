@@ -1,8 +1,9 @@
 import { Button, Grid, makeStyles, Typography } from '@material-ui/core';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { selectCartPrice } from '../../store/Cart/selectors';
 
 const useStyles = makeStyles((theme) => ({
-  orderSummary: {
+  shoppingCartSum: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -23,10 +24,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const OrderSummary = ({price}) => {
+export const ShoppingCartSum = () => {
   const classes = useStyles();
+  const price = useSelector(selectCartPrice);
   return (
-    <div className={classes.orderSummary}>
+    <div className={classes.shoppingCartSum}>
       <Grid container justifyContent="space-between">
         <Grid item className={classes.inner}>
           <Typography variant="h2" component="h3">Сума</Typography>
@@ -39,5 +41,3 @@ const OrderSummary = ({price}) => {
     </div>
   );
 };
-
-export default connect(state => ({price: state.cart.price}), null)(OrderSummary);

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAuth } from '../../hoc/ProvideAuth';
+import { useAuth } from '../../hooks/useAuth';
 import { EditField } from './EditField';
 
 export const EditFieldContainer = ({label, title, name, validationSchema, type, immutable}) => {

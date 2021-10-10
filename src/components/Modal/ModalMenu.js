@@ -1,5 +1,7 @@
 import { Grid, IconButton, makeStyles, Modal, Typography, Slide } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
+import { useEffect } from 'react';
+import { hasScrollbar } from '../../helpers/hasScrollbar';
 
 const useStyles = makeStyles((theme) => ({
   modalMenuInner: {
@@ -38,6 +40,10 @@ const useStyles = makeStyles((theme) => ({
 
 export const ModalMenu = ({onMenuToggle, isMenuOpened, children, title, menuWidth}) => {
   const classes = useStyles({menuWidth});
+  useEffect(() => {
+    if(isMenuOpened && hasScrollbar()) document.querySelector('header').style.paddingRight = '15px';
+    else {document.querySelector('header').style.paddingRight = '0';}
+  }, [isMenuOpened]);
   
   return (
     <Modal open={isMenuOpened} onClose={onMenuToggle}>

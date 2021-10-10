@@ -7,22 +7,20 @@ export function useProvideAuth() {
   useEffect(() => {
     getCurrentUserInfo().then(
     (data) => {
-      setUser(data.user);
-    },
-    () => {
-      setUser(false);
+      if(data.success) setUser(data.user);
+      else setUser(false);
     });
   }, []);
 
   useEffect(() => {
-    window.addEventListener('storage', function(event){
+    window.addEventListener('storage', function(event) {
       if (event.key === 'auth-event') {
         document.location.reload();
       }
     }); 
   }, []); 
 
-  const signIn = (data) => apiSignIn(data).then(res =>  {
+  const signIn = (data) => apiSignIn(data).then(res => {
     res.success ? setUser(res.user) : setUser(false);
     if(res.success) {
       setUser(res.user);

@@ -42,8 +42,6 @@ const passwordSchema = yup.object({
   password: yup.string().required().min(5).max(20),
 });
 
-// firstNameSchema.validate({firstName: "32444"}, { strict: true, abortEarly: false  }).then((res)=>{console.log(res)},(res)=>{console.log(res.errors)})
-
 export {
   signInSchema,
   signUpSchema,

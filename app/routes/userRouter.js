@@ -5,7 +5,7 @@ const { isAuth } = require('../middleware/provideAuth.js');
 const provideValidation = require('../middleware/provideValidation.js');
 const userRouter = express.Router();
 
-userRouter.get('/current', isAuth, UserController.getCurrentUserInfo);
+userRouter.get('/current', UserController.getCurrentUserInfo);
 userRouter.patch('/current', isAuth, provideValidation(editSchema), UserController.updateUserInfo);
 
 module.exports = userRouter;

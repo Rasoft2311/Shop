@@ -1,6 +1,6 @@
 import { ADD_PRODUCT_TO_CART, REMOVE_PRODUCT_FROM_CART, REMOVE_FULL_PRODUCT_FROM_CART }  from './types.js';
 
-const initialState = {
+const initialState = JSON.parse(localStorage.getItem('cart')) || {
   products: [],
   price: 0
 };
@@ -24,7 +24,7 @@ export const cartReducer = (state = initialState, action) => {
     }
     case REMOVE_PRODUCT_FROM_CART : {
       let products;
-      const productIndex = state.products.findIndex(el => el._id === action.payload._id);
+      const productIndex = state.products.findIndex(el => el._id === action.payload);
       let product = state.products[productIndex];
       if(product.amount === 1) {
         products = [...state.products.slice(0, productIndex), ...state.products.slice(productIndex + 1)];
@@ -39,7 +39,7 @@ export const cartReducer = (state = initialState, action) => {
     }
     case REMOVE_FULL_PRODUCT_FROM_CART : {
       let products;
-      const productIndex = state.products.findIndex(el => el._id === action.payload._id);
+      const productIndex = state.products.findIndex(el => el._id === action.payload);
       let product = state.products[productIndex];
       products = [...state.products.slice(0, productIndex), ...state.products.slice(productIndex + 1)];
       return {

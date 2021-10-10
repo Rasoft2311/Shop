@@ -24,7 +24,7 @@ export const darkTheme = createTheme({
       dark: '#37353b'
     },
     third: {
-      main: '#FF0000',
+      main: '#FF4545',
     },
     additional: {
       main: '#00FF00'
@@ -37,6 +37,9 @@ export const darkTheme = createTheme({
     },
     backgroundSecondary: {
       main: '#000'
+    },
+    backgroundThird: {
+      main: '#FF8383'
     },
     borderLine: {
       main: 'rgba(0,0,0,0.2)'

@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.primary.main,
+    padding: theme.spacing(3)
   },
   form: {
     width: '100%',
@@ -97,7 +98,7 @@ export const SignUp = ({submitHandler, initialValues, isEmailSent, error}) => {
               <Typography className={classes.error} variant="body2" color="error">{error}</Typography>
             }
           </>
-        : <EmailMessage message="Имейл с подтверждением был отправлен вам на почту, необходимо потдвердить аккаунт" />
+        : <EmailMessage message="Confirm your email." />
         }
       </Paper>
     </Container>

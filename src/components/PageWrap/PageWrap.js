@@ -18,11 +18,13 @@ const useStyles = makeStyles((theme) => ({
   },
   main: {
     marginTop: theme.customVariables.headerHeightMobile*2,
-    padding: theme.spacing(2),
+    padding: theme.spacing(4),
     [theme.breakpoints.up('md')]: {
       marginTop: theme.customVariables.headerHeightDesktop,
       marginLeft: theme.customVariables.headerHeightDesktop,
-      padding: theme.spacing(4),
+      padding: theme.spacing(8),
+      paddingTop: theme.spacing(4),
+      paddingBottom: theme.spacing(4),
     },
   }
 }));

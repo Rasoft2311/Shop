@@ -1,0 +1,1 @@
+export { FilterableProductsSection } from './FilterableProductsSection';

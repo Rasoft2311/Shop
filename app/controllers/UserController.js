@@ -2,14 +2,20 @@ const ServerError = require('../utils/errors/ServerError');
 
 class UserController {
   async getCurrentUserInfo(req, res, next) {
-    res.status(200).json({
-      success: true,
-      user: {
-        email: req.user.email,
-        firstName: req.user.firstName,
-        lastName: req.user.lastName
-      }
-    });
+    if (req.isAuthenticated()) {
+      res.status(200).json({
+        success: true,
+        user: {
+          email: req.user.email,
+          firstName: req.user.firstName,
+          lastName: req.user.lastName
+        }
+      });
+    } else {
+      res.status(200).json({
+        success: false,
+      });
+    }
   }
 
   async updateUserInfo(req, res, next) {

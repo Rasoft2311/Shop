@@ -1,4 +1,5 @@
 import { Link, List, ListItem, makeStyles } from '@material-ui/core';
+import { Link as BrowserLink} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   navigation: {
@@ -9,62 +10,48 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     padding: theme.spacing(2),
     color: theme.palette.primary.main,
-    textAlign: 'center'
+    textAlign: 'center',
+    transition: 'opacity .2s ease-in-out',
+    '&:hover': {
+      backgroundColor: theme.palette.backgroundThird.main,
+    },
   },
   active: {
     color: theme.palette.third.main,
   }
 }));
 
-export const Navigation = () => {
+export const Navigation = ({ onLinkClicked }) => {
   const classes = useStyles();
   return (
-    <List className={classes.navigation} disablePadding>
-      <ListItem disableGutters>
-        <Link className={classes.link} href="https://www.google.com" variant="h3">
-          Главная
-        </Link>
-      </ListItem>
-      <ListItem disableGutters>
-        <Link className={classes.link} href="https://www.google.com" variant="h3">
-          Категории
-        </Link>
-      </ListItem>
-      <ListItem disableGutters>
-        <Link className={classes.link} href="https://www.google.com" variant="h3">
-          О нас
-        </Link>
-      </ListItem>
-      <ListItem disableGutters>
-        <Link className={classes.link} href="https://www.google.com" variant="h3">
-          Договор публичной оферты
-        </Link>
-      </ListItem>
-      <ListItem disableGutters>
-        <Link className={classes.link} href="https://www.google.com" variant="h3">
-          Условия доставки
-        </Link>
-      </ListItem>
-      <ListItem disableGutters>
-        <Link className={classes.link} href="https://www.google.com" variant="h3">
-          Акции
-        </Link>
-      </ListItem>
-      <ListItem disableGutters>
-        <Link className={classes.link} href="https://www.google.com" variant="h3">
-          Акции
-        </Link>
-      </ListItem>
-      <ListItem disableGutters>
-        <Link className={classes.link} href="https://www.google.com" variant="h3">
-          PreLast
-        </Link>
-      </ListItem>
-      <ListItem disableGutters>
-        <Link className={classes.link} href="https://www.google.com" variant="h3">
-          SomeLast
-        </Link>
-      </ListItem>
-    </List>
+    <nav>
+      <List className={classes.navigation} disablePadding>
+        <ListItem disableGutters>
+          <Link onClick={onLinkClicked} className={classes.link} component={BrowserLink} to="/products" variant="h3">
+            Main Page
+          </Link>
+        </ListItem>
+        <ListItem disableGutters>
+          <Link onClick={onLinkClicked} className={classes.link} component={BrowserLink} to="/products" variant="h3">
+            Test Link 1
+          </Link>
+        </ListItem>
+        <ListItem disableGutters>
+          <Link onClick={onLinkClicked} className={classes.link} component={BrowserLink} to="/products" variant="h3">
+            Test Link 2
+          </Link>
+        </ListItem>
+        <ListItem disableGutters>
+          <Link onClick={onLinkClicked} className={classes.link} component={BrowserLink} to="/products" variant="h3">
+            Test Link 3
+          </Link>
+        </ListItem>
+        <ListItem disableGutters>
+          <Link onClick={onLinkClicked} className={classes.link} component={BrowserLink} to="/products" variant="h3">
+            Test Link 4
+          </Link>
+        </ListItem>
+      </List>
+    </nav>
   );
 };

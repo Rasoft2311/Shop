@@ -53,7 +53,7 @@ export const EditField = ({immutable, label, initialValues, isError, submitHandl
               <Typography className={classes.inputName} variant='h3' component='h2'>{title}</Typography>
             </Grid>
             <Grid className={classes.buttons} item>
-                <Button variant="contained" color="primary" onClick={editButtonHandler}>Изменить</Button>
+                <Button variant="contained" color="primary" onClick={editButtonHandler}>Change</Button>
             </Grid>
           </>
           :
@@ -70,7 +70,7 @@ export const EditField = ({immutable, label, initialValues, isError, submitHandl
                     <TextField className={classes.input} type="input" name={name}  variant="standard" autoFocus={true}/>
                   </Grid>
                   <Grid className={classes.buttons} item>
-                    <Button variant="contained" color="primary" type="submit" disabled={isSubmitting}>Сохранить</Button>
+                    <Button variant="contained" color="primary" type="submit" disabled={isSubmitting}>Save</Button>
                     <IconButton variant="contained" color="primary" aria-label="exit editing" disabled={isSubmitting} onClick={closeButtonHandler}>
                       <CloseIcon />
                     </IconButton>
@@ -81,7 +81,7 @@ export const EditField = ({immutable, label, initialValues, isError, submitHandl
           </Formik>
         }
       </Grid>
-      {isError && <Typography className={classes.error} variant="body2" color="error">Возникла ошбика, попробуйте еще раз</Typography>}
+      {isError && <Typography className={classes.error} variant="body2" color="error">Error occured, try again later</Typography>}
     </div>
 
   );

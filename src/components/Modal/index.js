@@ -1,1 +1,1 @@
-export { ModalMenuContainer } from './ModalMenuContainer';
+export { ModalMenu } from './ModalMenu';
